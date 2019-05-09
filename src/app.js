@@ -11,7 +11,7 @@ app.use( express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     const title = 'Index';
 
-    res.render('index.ejs', {title: title});
+    res.render('index', {title: title});
 });
 
 app.listen(3000, () => {
