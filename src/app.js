@@ -18,21 +18,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/savings', (req, res) => {
-    const account = accounts.savings;
-
-    res.render('account', { account: account });
-});
-
-app.get('/profile', (req, res) => {
-    res.render('profile', { user: users });
+    res.render('account', { account: accounts.savings });
 });
 
 app.get('/checking', (req, res) => {
-    res.render('profile', { user: users });
+    
+    res.render('account', { account: accounts.checking });
 });
 
 app.get('/credit', (req, res) => {
-    res.render('profile', { user: users });
+    res.render('account', { account: accounts.credit });
+});
+
+app.get('/profile', (req, res) => {
+    res.render('profile', { user: users[0] });
 });
 
 app.listen(3000, () => {
