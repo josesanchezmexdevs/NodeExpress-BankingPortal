@@ -27,6 +27,14 @@ app.get('/profile', (req, res) => {
     res.render('profile', { user: users });
 });
 
+app.get('/checking', (req, res) => {
+    res.render('profile', { user: users });
+});
+
+app.get('/credit', (req, res) => {
+    res.render('profile', { user: users });
+});
+
 app.listen(3000, () => {
     console.log("Project Running on port 3000!");
 });
