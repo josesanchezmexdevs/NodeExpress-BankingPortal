@@ -14,6 +14,6 @@ app.get('/', (req, res) => {
     res.render('index.ejs', {title: title});
 });
 
-app.listen(3000, 'localhost', () => {
+app.listen(3000, () => {
     console.log("Project Running on port 3000!");
 });
