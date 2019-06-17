@@ -50,6 +50,19 @@ app.post('/transfer', (req, res) =>  {
     res.render('transfer', { message: "Transfer Completed" });
 });
 
+app.get('/payment', (req, res) => {
+    res.render('payment', { account: accounts.credit});
+});
+
+app.post('/payment', (req, res) => {
+    const bodyParams = req.body;
+    accounts.credit.balance = accounts.credit.balance - bodyParams.amount;
+    accounts.credit.available = parseInt(bodyParams.amount) + parseInt(accounts.credit.available);
+    const accountsJSON = JSON.stringify(accounts, null, 4);
+    fs.writeFileSync(path.join(__dirname, 'json/accounts.json'), accountsJSON, 'utf8');
+    res.render('payment', {message: "Payment Successful", account: accounts.credit});
+});
+
 app.listen(3000, () => {
     console.log("Project Running on port 3000!");
 });
