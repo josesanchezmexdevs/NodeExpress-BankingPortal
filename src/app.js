@@ -3,16 +3,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+const { accounts, users, writeJSON } = require('./data');
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use( express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
-
-const accountData = fs.readFileSync('src/json/accounts.json', { encoding: 'UTF8' });
-const accounts = JSON.parse(accountData);
-const userData = fs.readFileSync('src/json/users.json', { encoding: 'UTF8' });
-const users = JSON.parse(userData);
 
 app.get('/', (req, res) => {
     const title = 'Account Summary';
@@ -44,8 +41,7 @@ app.post('/transfer', (req, res) =>  {
     const bodyParams = req.body;
     accounts[bodyParams.from].balance = accounts[bodyParams.from].balance - bodyParams.amount;
     accounts[bodyParams.to].balance = parseInt(accounts[bodyParams.to].balance) + parseInt(bodyParams.amount, 10);
-    const accountsJSON = JSON.stringify(accounts, null, 4);
-    fs.writeFileSync(path.join(__dirname, 'json/accounts.json'), accountsJSON, 'utf8');
+    writeJSON();
     res.render('transfer', { message: "Transfer Completed" });
 });
 
