@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { accounts, writeJSON } = require('../data');
 
-app.get('/transfer', (req, res) =>  {
+router.get('/transfer', (req, res) =>  {
     res.render('transfer', {});
 });
 
-app.post('/transfer', (req, res) =>  {
+router.post('/transfer', (req, res) =>  {
     const bodyParams = req.body;
     accounts[bodyParams.from].balance = accounts[bodyParams.from].balance - bodyParams.amount;
     accounts[bodyParams.to].balance = parseInt(accounts[bodyParams.to].balance) + parseInt(bodyParams.amount, 10);
@@ -14,11 +14,11 @@ app.post('/transfer', (req, res) =>  {
     res.render('transfer', { message: "Transfer Completed" });
 });
 
-app.get('/payment', (req, res) => {
+router.get('/payment', (req, res) => {
     res.render('payment', { account: accounts.credit});
 });
 
-app.post('/payment', (req, res) => {
+router.post('/payment', (req, res) => {
     const bodyParams = req.body;
     accounts.credit.balance = accounts.credit.balance - bodyParams.amount;
     accounts.credit.available = parseInt(bodyParams.amount) + parseInt(accounts.credit.available);
