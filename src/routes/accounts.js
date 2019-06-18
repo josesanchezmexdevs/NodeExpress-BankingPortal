@@ -17,4 +17,4 @@ router.get('/credit', (req, res) => {
 });
 
 
-module.exports = { router };
+module.exports = router;
